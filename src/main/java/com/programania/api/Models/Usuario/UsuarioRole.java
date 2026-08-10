@@ -1,4 +1,4 @@
-package com.programania.api.Models.Usuarios;
+package com.programania.api.Models.Usuario;
 
 public enum  UsuarioRole{
 

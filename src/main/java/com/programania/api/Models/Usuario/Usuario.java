@@ -1,6 +1,5 @@
-package com.programania.api.Models.Usuarios;
+package com.programania.api.Models.Usuario;
 
-import com.programania.api.Models.Usuarios.UsuarioRole;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
