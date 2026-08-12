@@ -5,14 +5,12 @@ import com.programania.api.DTO.Usuario.UsuarioPasswordDTO;
 import com.programania.api.Models.Usuario.Usuario;
 import com.programania.api.Repositories.Usuario.UsuarioRepository;
 
-import com.programania.api.Services.Infra.PasswordVerificationService;
-import org.apache.coyote.Response;
+import com.programania.api.Services.Infra.PasswordVerification.PasswordVerificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -56,7 +54,7 @@ public class UsuarioService {
     }
 
     public ResponseEntity<?> create(Usuario usuario) {
-        if(this.usuarioRepository.findByLogin(usuario.getLogin()) != null) return ResponseEntity.badRequest().build();
+        if(this.usuarioRepository.findByEmail(usuario.getEmail()) != null) return ResponseEntity.badRequest().build();
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 

@@ -1,6 +1,7 @@
 package com.programania.api.Config;
 
-import com.programania.api.Services.Infra.TokenService;
+import com.programania.api.Repositories.Usuario.UsuarioRepository;
+import com.programania.api.Services.Infra.JWT.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,19 +22,19 @@ public class SecurityFilter extends OncePerRequestFilter {
     TokenService tokenService;
 
     @Autowired
-    //UsuarioRepository userRepository;
+    UsuarioRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
 
         if(token != null){
-            //var login = tokenService.validateToken(token);
-            //UserDetails user = userRepository.findByLogin(login);
+            var email = tokenService.validateToken(token);
+            UserDetails user = userRepository.findByEmail(email);
 
-            //var auth = new UsernamePasswordAuthenticationToken(user, login, user.getAuthorities());
+            var auth = new UsernamePasswordAuthenticationToken(user, email, user.getAuthorities());
 
-            //SecurityContextHolder.getContext().setAuthentication(auth);
+            SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
         filterChain.doFilter(request, response);

@@ -64,7 +64,12 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.getLogin();
+        return this.getEmail();
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

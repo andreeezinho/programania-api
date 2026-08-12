@@ -1,4 +1,4 @@
-package com.programania.api.Services.Infra;
+package com.programania.api.Services.Infra.PasswordVerification;
 
 import com.programania.api.DTO.Usuario.UsuarioPasswordDTO;
 import org.springframework.beans.factory.annotation.Autowired;
