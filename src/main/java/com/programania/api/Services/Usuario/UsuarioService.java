@@ -54,7 +54,7 @@ public class UsuarioService {
     }
 
     public ResponseEntity<?> create(Usuario usuario) {
-        if(this.usuarioRepository.findByLogin(usuario.getLogin()) != null) return ResponseEntity.badRequest().build();
+        if(this.usuarioRepository.findByEmail(usuario.getEmail()) != null) return ResponseEntity.badRequest().build();
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
