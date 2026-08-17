@@ -2,6 +2,7 @@ package com.programania.api.DTO.Desafio;
 
 import com.programania.api.Models.Desafio.Desafio;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public record DesafioDTO(
@@ -9,21 +10,21 @@ public record DesafioDTO(
         String nome,
         String descricao,
         String dicas,
-        int fase_id,
+        int faseId,
         Boolean ativo,
-        Timestamp created_at,
-        Timestamp updated_at
-){
+        Instant createdAt,
+        Instant updatedAt
+) {
     public DesafioDTO(Desafio desafio) {
         this(
                 desafio.getUuid(),
                 desafio.getNome(),
                 desafio.getDescricao(),
                 desafio.getDicas(),
-                desafio.getFase_id(),
+                desafio.getFaseId(),
                 desafio.getAtivo(),
-                desafio.getCreated_at(),
-                desafio.getUpdated_at()
+                desafio.getCreatedAt(),
+                desafio.getUpdatedAt()
         );
     }
 }
