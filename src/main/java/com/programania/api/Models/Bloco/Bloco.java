@@ -1,4 +1,4 @@
-package com.programania.api.Models.Block;
+package com.programania.api.Models.Bloco;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -15,7 +15,7 @@ import org.hibernate.annotations.UuidGenerator;
 @NoArgsConstructor
 @Data
 @Entity
-public class Block {
+public class Bloco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
