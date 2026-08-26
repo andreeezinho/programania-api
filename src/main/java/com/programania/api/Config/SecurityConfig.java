@@ -36,9 +36,13 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/", "/register", "/auth", "/logout").permitAll()
+                .requestMatchers("/", "/register", "/auth", "/auth/google", "/auth/google-link", "/auth/google/success", "/auth/google/error", "/logout").permitAll()
                 .anyRequest().authenticated()
             )
+            .oauth2Login(oauth2 -> oauth2
+                    .loginPage("/auth/google")
+                    .defaultSuccessUrl("/auth/google/success", true)
+                    .failureUrl("/auth/google/error"))
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
