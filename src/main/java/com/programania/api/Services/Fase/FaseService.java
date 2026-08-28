@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.programania.api.DTO.Fase.FaseDTO;
 import com.programania.api.Models.Fase.Fase;
 import com.programania.api.Repositories.Fase.FaseRepository;
 
@@ -19,48 +20,68 @@ public class FaseService {
 
     public ResponseEntity<?> findAll() {
 
-        return ResponseEntity.ok(this.faseRepository.findAll());
+        return ResponseEntity.ok(
+                this.faseRepository.findAll()
+                        .stream()
+                        .map(FaseDTO::new)
+                        .toList()
+        );
 
     }
 
     public ResponseEntity<?> findByUuid(UUID uuid) {
 
-        return this.faseRepository.findByUuid(uuid).map(record -> ResponseEntity.ok(record)).orElse(ResponseEntity
-                .notFound().build());
+        return this.faseRepository
+                .findByUuid(uuid)
+                .map(record -> ResponseEntity.ok().body(new FaseDTO(record)))
+                .orElse(ResponseEntity.notFound().build());
+
     }
 
     public ResponseEntity<?> create(Fase fase) {
 
-        return ResponseEntity.ok(this.faseRepository.save(fase));
+        return ResponseEntity.ok(
+                new FaseDTO(
+                        this.faseRepository.save(fase)
+                )
+        );
 
     }
 
     public ResponseEntity<?> update(UUID uuid, Fase fase) {
 
-        return this.faseRepository.findByUuid(uuid).map(record -> {
+        return this.faseRepository
+                .findByUuid(uuid)
+                .map(record -> {
 
-            record.setNumero(fase.getNumero());
-            record.setNome(fase.getNome());
-            record.setAtivo(fase.getAtivo());
+                    record.setNumero(fase.getNumero());
+                    record.setNome(fase.getNome());
+                    record.setAtivo(fase.getAtivo());
 
-            Fase update = this.faseRepository.save(record);
+                    Fase update = this.faseRepository.save(record);
 
-            return ResponseEntity.ok().body(update);
+                    return ResponseEntity.ok().body(new FaseDTO(update));
 
-        }).orElse(ResponseEntity.notFound().build());
+                })
+                .orElse(ResponseEntity.notFound().build());
 
     }
 
     public ResponseEntity<?> delete(UUID uuid) {
 
-        return this.faseRepository.findByUuid(uuid).map(record -> {
+        return this.faseRepository
+                .findByUuid(uuid)
+                .map(record -> {
 
-            record.setAtivo(false);
+                    record.setAtivo(false);
 
-            this.faseRepository.save(record);
+                    Fase update = this.faseRepository.save(record);
 
-            return ResponseEntity.ok().body(true);
+                    return ResponseEntity.ok().body(new FaseDTO(update));
 
-        }).orElse(ResponseEntity.notFound().build());
+                })
+                .orElse(ResponseEntity.notFound().build());
+
     }
+
 }

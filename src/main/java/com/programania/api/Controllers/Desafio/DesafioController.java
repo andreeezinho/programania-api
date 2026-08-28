@@ -1,4 +1,4 @@
-package com.programania.api.Controller.Desafio;
+package com.programania.api.Controllers.Desafio;
 
 import com.programania.api.DTO.Desafio.DesafioDTO;
 import com.programania.api.Services.Desafio.DesafioService;
