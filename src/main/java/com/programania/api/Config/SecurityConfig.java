@@ -1,5 +1,6 @@
 package com.programania.api.Config;
 
+import com.programania.api.Services.Auth.GoogleAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,9 @@ public class SecurityConfig {
     @Autowired
     SecurityFilter securityFilter;
 
+    @Autowired
+    GoogleAuthenticationSuccessHandler googleAuthenticationSuccessHandler;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -33,16 +37,16 @@ public class SecurityConfig {
                 return corsConfig;
             }))
             .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/", "/register", "/auth", "/auth/google", "/auth/google-link", "/auth/google/success", "/auth/google/error", "/logout").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2
-                    .loginPage("/auth/google")
-                    .defaultSuccessUrl("/auth/google/success", true)
-                    .failureUrl("/auth/google/error"))
+                    .successHandler(googleAuthenticationSuccessHandler)
+                    .failureUrl("/auth/google/error")
+            )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

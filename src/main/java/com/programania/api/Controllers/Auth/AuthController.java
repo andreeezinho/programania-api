@@ -48,30 +48,6 @@ public class AuthController {
         return ResponseEntity.ok(new TokenDTO(token));
     }
 
-    @GetMapping("/google-link")
-    public ResponseEntity<?> getGoogleAuth(HttpServletRequest request) {
-        OAuth2AuthorizationRequestResolver resolver = new DefaultOAuth2AuthorizationRequestResolver(
-            this.clientRegistrationRepository, "/oauth2/authorization"
-        );
-
-        OAuth2AuthorizationRequest authorizationRequest = resolver.resolve(request, "google");
-
-        String authorizationUrl = authorizationRequest.getAuthorizationRequestUri();
-
-        return ResponseEntity.ok(
-            Map.of("url", authorizationUrl)
-        );
-    }
-
-    @GetMapping("/google/success")
-    public ResponseEntity<?> loginGoogle(OAuth2AuthenticationToken oAuth2AuthenticationToken){
-        Usuario user = this.googleAuthService.authByGoogleOAuth2(oAuth2AuthenticationToken);
-
-        var token = tokenService.generateToken((Usuario) user);
-
-        return ResponseEntity.ok(new TokenDTO(token));
-    }
-
 }
 
 
