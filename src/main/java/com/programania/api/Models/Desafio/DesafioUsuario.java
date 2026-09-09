@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -21,6 +22,9 @@ import java.util.UUID;
 public class DesafioUsuario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @UuidGenerator
     @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(length = 36, unique = true, nullable = false, updatable = false)
@@ -40,12 +44,9 @@ public class DesafioUsuario {
     @JoinColumn(name = "usuarios_id", nullable = false)
     private Usuario usuario;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private Instant createdAt;
+    @Column(updatable = false)
+    private Timestamp created_at;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Instant updatedAt;
+    private Timestamp updated_at;
 
 }

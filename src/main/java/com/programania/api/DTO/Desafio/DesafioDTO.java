@@ -2,6 +2,7 @@ package com.programania.api.DTO.Desafio;
 
 import com.programania.api.Models.Desafio.Desafio;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -12,8 +13,8 @@ public record DesafioDTO(
         String dicas,
         int faseId,
         Boolean ativo,
-        Instant createdAt,
-        Instant updatedAt
+        Timestamp created_at,
+        Timestamp created_at
 ) {
     public DesafioDTO(Desafio desafio) {
         this(
