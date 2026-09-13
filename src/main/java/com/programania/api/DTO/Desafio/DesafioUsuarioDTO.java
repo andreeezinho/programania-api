@@ -10,7 +10,7 @@ public record DesafioUsuarioDTO (
     String nome,
     Boolean completa,
     Long desafaioId,
-    Long faseId,
+    Long usuarioId,
     Timestamp created_at,
     Timestamp updated_at
 ){
