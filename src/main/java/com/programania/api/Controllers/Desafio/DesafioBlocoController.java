@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Controller
-@RestController("/desafio-bloco")
+@RequestMapping("/desafio-bloco")
 public class DesafioBlocoController {
 
     @Autowired

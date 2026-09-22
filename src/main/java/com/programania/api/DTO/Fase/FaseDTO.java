@@ -23,12 +23,14 @@ public class FaseDTO {
     private Timestamp updated_at;
 
     public FaseDTO(Fase fase) {
-        this.id = fase.getId();
-        this.uuid = fase.getUuid();
-        this.numero = fase.getNumero();
-        this.nome = fase.getNome();
-        this.ativo = fase.getAtivo();
-        this.created_at = fase.getCreated_at();
-        this.updated_at = fase.getUpdated_at();
+        this(
+            fase.getId(),
+            fase.getUuid(),
+            fase.getNumero(),
+            fase.getNome(),
+            fase.getAtivo(),
+            fase.getCreated_at(),
+            fase.getUpdated_at()
+        );
     }
 }

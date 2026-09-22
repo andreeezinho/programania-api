@@ -14,7 +14,7 @@ public record DesafioDTO(
         int faseId,
         Boolean ativo,
         Timestamp created_at,
-        Timestamp created_at
+        Timestamp updated_at
 ) {
     public DesafioDTO(Desafio desafio) {
         this(
@@ -24,8 +24,8 @@ public record DesafioDTO(
                 desafio.getDicas(),
                 desafio.getFaseId(),
                 desafio.getAtivo(),
-                desafio.getCreatedAt(),
-                desafio.getUpdatedAt()
+                desafio.getCreated_at(),
+                desafio.getUpdated_at()
         );
     }
 }

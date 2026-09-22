@@ -24,8 +24,8 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token  = JWT
                     .create()
-                    .withIssuer("bibliotroca")
-                    .withSubject(usuario.getLogin())
+                    .withIssuer("programania-token")
+                    .withSubject(usuario.getEmail())
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
             return token;
@@ -39,7 +39,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             return JWT.require(algorithm)
-                    .withIssuer("bibliotroca")
+                    .withIssuer("programania-token")
                     .build()
                     .verify(token)
                     .getSubject();
