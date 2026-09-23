@@ -33,7 +33,7 @@ public class GoogleAuthenticationSuccessHandler implements AuthenticationSuccess
                 tokenService.generateToken(user);
 
         response.sendRedirect(
-                "http://localhost:5173/?token=" + token
+                "http://localhost:5175/login?token=" + token
         );
     }
 }
