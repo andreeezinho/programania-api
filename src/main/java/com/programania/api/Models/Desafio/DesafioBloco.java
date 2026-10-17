@@ -16,6 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "desafio_bloco")
 public class DesafioBloco {
 
     @Id
