@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DesafioRepository extends JpaRepository<Desafio, UUID> {
-    Page<Desafio> findByFaseUuidAndAtivo(UUID faseUuid, Boolean ativo, Pageable pageable);
+    Page<Desafio> findByFaseIdAndAtivo(Long faseId, Boolean ativo, Pageable pageable);
     Optional<Desafio> findByNome(String nome);
 }
