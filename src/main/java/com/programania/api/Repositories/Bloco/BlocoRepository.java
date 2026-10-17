@@ -10,8 +10,6 @@ import java.util.UUID;
 @Repository
 public interface BlocoRepository extends JpaRepository <Bloco, Long> {
 
-    Optional<Bloco> findByDesafioIdAndAtivo(Long desafioId, Boolean ativo);
-
     Optional<Bloco> findByUuid(UUID uuid);
 
 }
