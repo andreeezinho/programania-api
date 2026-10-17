@@ -3,6 +3,7 @@ package com.programania.api.Services.Desafio;
 import com.programania.api.DTO.Desafio.DesafioDTO;
 import com.programania.api.Models.Desafio.Desafio;
 import com.programania.api.Repositories.Desafio.DesafioRepository;
+import com.programania.api.Repositories.Fase.FaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class DesafioService {
 
     private final DesafioRepository desafioRepository;
+    private final FaseRepository faseRepository;
 
     public Page<DesafioDTO> listarTodos(Pageable pageable) {
         return desafioRepository.findAll(pageable)
@@ -22,7 +24,9 @@ public class DesafioService {
     }
 
     public Page<DesafioDTO> listarPorFase(UUID faseUuid, Pageable pageable) {
-        return desafioRepository.findByFaseUuidAndAtivo(faseUuid, true, pageable)
+        var fase = this.faseRepository.findByUuid(faseUuid);
+
+        return desafioRepository.findByFaseIdAndAtivo(fase.get().getId(), true, pageable)
                 .map(DesafioDTO::new);
     }
 
