@@ -23,9 +23,9 @@ public class DesafioController {
         return ResponseEntity.ok(desafioService.listarTodos(pageable));
     }
 
-    @GetMapping("/fase/{faseId}")
-    public ResponseEntity<Page<DesafioDTO>> listarPorFase(@PathVariable int faseId, Pageable pageable) {
-        return ResponseEntity.ok(desafioService.listarPorFase(faseId, pageable));
+    @GetMapping("/fase/{faseUuid}")
+    public ResponseEntity<Page<DesafioDTO>> listarPorFase(@PathVariable UUID faseUuid, Pageable pageable) {
+        return ResponseEntity.ok(desafioService.listarPorFase(faseUuid, pageable));
     }
 
     @GetMapping("/{uuid}")
