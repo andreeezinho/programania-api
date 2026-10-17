@@ -38,6 +38,8 @@ public class Fase {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    private String descricao;
+
     @Column(columnDefinition = "TINYINT(1) DEFAULT 1", nullable = false)
     private Boolean ativo;
 
