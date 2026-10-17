@@ -21,8 +21,8 @@ public class DesafioService {
                 .map(DesafioDTO::new);
     }
 
-    public Page<DesafioDTO> listarPorFase(int faseId, Pageable pageable) {
-        return desafioRepository.findByFaseIdAndAtivo(faseId, true, pageable)
+    public Page<DesafioDTO> listarPorFase(UUID faseUuid, Pageable pageable) {
+        return desafioRepository.findByFaseUuidAndAtivo(faseUuid, true, pageable)
                 .map(DesafioDTO::new);
     }
 
