@@ -41,7 +41,7 @@ public class DesafioBlocoService {
         var desafio = this.desafioRepository.findByUuid(desafioUuid);
 
         return ResponseEntity.ok(this.desafioBlocoRepository
-                .findByDesafiosIdAndAtivo(desafio.get().getId(), true)
+                .findByDesafio_IdAndAtivo(desafio.get().getId(), true)
                 .stream()
                 .map(DesafioBlocoDTO::new)
                 .toList());
