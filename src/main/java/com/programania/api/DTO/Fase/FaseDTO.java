@@ -18,6 +18,7 @@ public class FaseDTO {
     private UUID uuid;
     private Integer numero;
     private String nome;
+    private String descricao;
     private Boolean ativo;
     private Timestamp created_at;
     private Timestamp updated_at;
@@ -28,6 +29,7 @@ public class FaseDTO {
             fase.getUuid(),
             fase.getNumero(),
             fase.getNome(),
+            fase.getDescricao(),
             fase.getAtivo(),
             fase.getCreated_at(),
             fase.getUpdated_at()
