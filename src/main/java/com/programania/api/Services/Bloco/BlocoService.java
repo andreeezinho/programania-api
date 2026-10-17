@@ -20,9 +20,6 @@ public class BlocoService {
     @Autowired
     BlocoRepository blocoRepository;
 
-    @Autowired
-    DesafioRepository desafioRepository;
-
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(this.blocoRepository
                 .findAll()
@@ -36,16 +33,6 @@ public class BlocoService {
                 .findByUuid(uuid)
                 .map(record -> ResponseEntity.ok().body(new BlocoDTO(record)))
                 .orElse(ResponseEntity.notFound().build());
-    }
-
-    public ResponseEntity<?> findByChallenge(UUID desafioUuid) {
-        var desafio = this.desafioRepository.findByUuid(desafioUuid);
-
-        return ResponseEntity.ok(this.blocoRepository
-                .findByDesafioIdAndAtivo(desafio.get().getId(), true)
-                .stream()
-                .map(BlocoDTO::new)
-                .toList());
     }
 
     public ResponseEntity<?> findById(Long id){

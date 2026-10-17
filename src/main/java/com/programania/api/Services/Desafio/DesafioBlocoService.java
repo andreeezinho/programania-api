@@ -1,8 +1,10 @@
 package com.programania.api.Services.Desafio;
 
+import com.programania.api.DTO.Bloco.BlocoDTO;
 import com.programania.api.DTO.Desafio.DesafioBlocoDTO;
 import com.programania.api.Models.Desafio.DesafioBloco;
 import com.programania.api.Repositories.Desafio.DesafioBlocoRepository;
+import com.programania.api.Repositories.Desafio.DesafioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class DesafioBlocoService {
     @Autowired
     DesafioBlocoRepository desafioBlocoRepository;
 
+    @Autowired
+    DesafioRepository desafioRepository;
+
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(this.desafioBlocoRepository
                 .findAll()
@@ -30,6 +35,16 @@ public class DesafioBlocoService {
                 .findByUuid(uuid)
                 .map(record -> ResponseEntity.ok().body(new DesafioBlocoDTO(record)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    public ResponseEntity<?> findByChallenge(UUID desafioUuid) {
+        var desafio = this.desafioRepository.findByUuid(desafioUuid);
+
+        return ResponseEntity.ok(this.desafioBlocoRepository
+                .findByDesafioIdAndAtivo(desafio.get().getId(), true)
+                .stream()
+                .map(DesafioBlocoDTO::new)
+                .toList());
     }
 
     public ResponseEntity<?> create(DesafioBloco desafioBloco) {

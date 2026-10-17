@@ -21,9 +21,6 @@ public class DesafioBlocoController {
     @Autowired
     DesafioBlocoService desafioBlocoService;
 
-    @Autowired
-    BlocoService blocoService;
-
     @GetMapping
     public ResponseEntity<?> index() {
         return desafioBlocoService.findAll();
@@ -36,7 +33,7 @@ public class DesafioBlocoController {
 
     @GetMapping("/blocos/{desafioUuid}")
     public ResponseEntity<?> listarPorDesafio(@PathVariable UUID desafioUuid, Pageable pageable) {
-        return ResponseEntity.ok(blocoService.findByChallenge(desafioUuid));
+        return ResponseEntity.ok(desafioBlocoService.findByChallenge(desafioUuid));
     }
 
     @PostMapping
