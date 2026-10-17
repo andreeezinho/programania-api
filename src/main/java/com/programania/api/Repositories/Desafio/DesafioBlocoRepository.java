@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface DesafioBlocoRepository extends JpaRepository<DesafioBloco, UUID> {
 
-    Optional<DesafioBloco> findByDesafioIdAndAtivo(Long desafioId, Boolean ativo);
+    Optional<DesafioBloco> findByDesafiosIdAndAtivo(Long desafioId, Boolean ativo);
 
     Optional<DesafioBloco> findByUuid(UUID uuid);
 
