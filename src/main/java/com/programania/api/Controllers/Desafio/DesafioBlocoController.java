@@ -1,9 +1,13 @@
 package com.programania.api.Controllers.Desafio;
 
+import com.programania.api.DTO.Desafio.DesafioDTO;
 import com.programania.api.Models.Desafio.DesafioBloco;
+import com.programania.api.Services.Bloco.BlocoService;
 import com.programania.api.Services.Desafio.DesafioBlocoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,9 @@ public class DesafioBlocoController {
     @Autowired
     DesafioBlocoService desafioBlocoService;
 
+    @Autowired
+    BlocoService blocoService;
+
     @GetMapping
     public ResponseEntity<?> index() {
         return desafioBlocoService.findAll();
@@ -25,6 +32,11 @@ public class DesafioBlocoController {
     @GetMapping(path = {"/{uuid}"})
     public ResponseEntity<?> findByUuid(@PathVariable UUID uuid){
         return this.desafioBlocoService.findByUuid(uuid);
+    }
+
+    @GetMapping("/blocos/{desafioUuid}")
+    public ResponseEntity<?> listarPorDesafio(@PathVariable UUID desafioUuid, Pageable pageable) {
+        return ResponseEntity.ok(blocoService.findByChallenge(desafioUuid));
     }
 
     @PostMapping

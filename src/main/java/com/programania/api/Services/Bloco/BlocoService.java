@@ -1,9 +1,13 @@
 package com.programania.api.Services.Bloco;
 
+import com.programania.api.DTO.Desafio.DesafioDTO;
 import com.programania.api.Models.Bloco.Bloco;
 import com.programania.api.DTO.Bloco.BlocoDTO;
 import com.programania.api.Repositories.Bloco.BlocoRepository;
+import com.programania.api.Repositories.Desafio.DesafioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,9 @@ public class BlocoService {
 
     @Autowired
     BlocoRepository blocoRepository;
+
+    @Autowired
+    DesafioRepository desafioRepository;
 
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(this.blocoRepository
@@ -29,6 +36,16 @@ public class BlocoService {
                 .findByUuid(uuid)
                 .map(record -> ResponseEntity.ok().body(new BlocoDTO(record)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    public ResponseEntity<?> findByChallenge(UUID desafioUuid) {
+        var desafio = this.desafioRepository.findByUuid(desafioUuid);
+
+        return ResponseEntity.ok(this.blocoRepository
+                .findByDesafioIdAndAtivo(desafio.get().getId(), true)
+                .stream()
+                .map(BlocoDTO::new)
+                .toList());
     }
 
     public ResponseEntity<?> findById(Long id){
