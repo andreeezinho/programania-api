@@ -9,6 +9,7 @@ import java.util.UUID;
 public record DesafioDTO(
         UUID uuid,
         String nome,
+        int numero,
         String descricao,
         String dicas,
         int faseId,
@@ -20,6 +21,7 @@ public record DesafioDTO(
         this(
                 desafio.getUuid(),
                 desafio.getNome(),
+                desafio.getNumero(),
                 desafio.getDescricao(),
                 desafio.getDicas(),
                 desafio.getFaseId(),
