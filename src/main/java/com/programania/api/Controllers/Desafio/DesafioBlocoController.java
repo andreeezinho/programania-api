@@ -33,7 +33,7 @@ public class DesafioBlocoController {
 
     @GetMapping("/blocos/{desafioUuid}")
     public ResponseEntity<?> listarPorDesafio(@PathVariable UUID desafioUuid, Pageable pageable) {
-        return ResponseEntity.ok(desafioBlocoService.findByChallenge(desafioUuid));
+        return desafioBlocoService.findByChallenge(desafioUuid);
     }
 
     @PostMapping
