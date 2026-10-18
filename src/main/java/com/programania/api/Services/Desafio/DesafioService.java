@@ -30,8 +30,8 @@ public class DesafioService {
                 .map(DesafioDTO::new);
     }
 
-    public DesafioDTO buscarPorId(UUID uuid) {
-        return desafioRepository.findById(uuid)
+    public DesafioDTO findByUuid(UUID uuid) {
+        return desafioRepository.findByUuid(uuid)
                 .map(DesafioDTO::new)
                 .orElseThrow(() -> new RuntimeException("Desafio não encontrado"));
     }

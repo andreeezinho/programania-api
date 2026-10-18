@@ -29,8 +29,8 @@ public class DesafioController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<DesafioDTO> buscarPorId(@PathVariable UUID uuid) {
-        return ResponseEntity.ok(desafioService.buscarPorId(uuid));
+    public ResponseEntity<DesafioDTO> findByUuid(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(desafioService.findByUuid(uuid));
     }
 
     @GetMapping("/nome/{nome}")
