@@ -45,6 +45,12 @@ public class Desafio {
     @Column(name = "fase_id", nullable = false)
     private int faseId;
 
+    @Column(nullable = false)
+    private int startCell;
+
+    @Column(nullable = false)
+    private int finishCell;
+
     @Column(columnDefinition = "TINYINT(1) DEFAULT 1", nullable = false)
     private Boolean ativo;
 

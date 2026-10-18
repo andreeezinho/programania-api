@@ -13,6 +13,8 @@ public record DesafioDTO(
         String descricao,
         String dicas,
         int faseId,
+        int startCell,
+        int finishCell,
         Boolean ativo,
         Timestamp created_at,
         Timestamp updated_at
@@ -25,6 +27,8 @@ public record DesafioDTO(
                 desafio.getDescricao(),
                 desafio.getDicas(),
                 desafio.getFaseId(),
+                desafio.getStartCell(),
+                desafio.getFinishCell(),
                 desafio.getAtivo(),
                 desafio.getCreated_at(),
                 desafio.getUpdated_at()
