@@ -27,8 +27,8 @@ public record DesafioDTO(
                 desafio.getDescricao(),
                 desafio.getDicas(),
                 desafio.getFaseId(),
-                desafio.getStartCell(),
-                desafio.getFinishCell(),
+                desafio.getStart_cell(),
+                desafio.getFinish_cell(),
                 desafio.getAtivo(),
                 desafio.getCreated_at(),
                 desafio.getUpdated_at()
