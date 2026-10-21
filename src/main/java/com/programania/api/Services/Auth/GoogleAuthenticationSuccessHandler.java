@@ -33,7 +33,7 @@ public class GoogleAuthenticationSuccessHandler implements AuthenticationSuccess
                 tokenService.generateToken(user);
 
         response.sendRedirect(
-                "http://localhost:5175/login?token=" + token
+                "https://programania.vercel.app/login?token=" + token
         );
     }
 }
