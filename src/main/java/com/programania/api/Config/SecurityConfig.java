@@ -40,7 +40,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/", "/users", "/auth", "/auth/google", "/auth/google-link", "/auth/google/success", "/auth/google/error", "/logout").permitAll()
+                .requestMatchers("/", "/health", "/users", "/auth", "/auth/google", "/auth/google-link", "/auth/google/success", "/auth/google/error", "/logout", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2

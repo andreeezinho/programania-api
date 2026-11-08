@@ -28,8 +28,8 @@ public class DesafioBloco {
     @Column(length = 36, unique = true, nullable = false, updatable = false)
     private UUID uuid;
 
-    @Column(nullable = false, columnDefinition = "DEFAULT 1")
-    private Integer ordem;
+    @Column(nullable = false)
+    private Integer ordem = 1;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "desafios_id", nullable = false)

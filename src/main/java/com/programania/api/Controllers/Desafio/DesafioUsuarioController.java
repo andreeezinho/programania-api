@@ -5,13 +5,12 @@ import com.programania.api.Services.Desafio.DesafioUsuarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@Controller
-@RestController("/desafio-usuario")
+@RestController
+@RequestMapping("/desafio-usuario")
 public class DesafioUsuarioController {
 
     @Autowired

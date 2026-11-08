@@ -4,6 +4,7 @@ import com.programania.api.Models.Usuario.Usuario;
 import com.programania.api.Services.Infra.JWT.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,6 +16,9 @@ import java.io.IOException;
 public class GoogleAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final GoogleAuthService googleAuthService;
     private final TokenService tokenService;
+
+    @Value("${app.frontend.url:http://localhost:3000}")
+    private String frontendUrl;
 
     public GoogleAuthenticationSuccessHandler(GoogleAuthService googleAuthService, TokenService tokenService) {
         this.googleAuthService = googleAuthService;
@@ -33,7 +37,7 @@ public class GoogleAuthenticationSuccessHandler implements AuthenticationSuccess
                 tokenService.generateToken(user);
 
         response.sendRedirect(
-                "https://programania.vercel.app/login?token=" + token
+                frontendUrl + "/login?token=" + token
         );
     }
 }
